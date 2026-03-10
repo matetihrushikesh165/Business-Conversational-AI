@@ -1,0 +1,11 @@
+ID,Name,Role,Department,Salary,Join_Date,Performance_Score
+1,Alice Smith,Software Engineer,Engineering,95000,2022-01-15,4.5
+2,Bob Jones,Data Analyst,Data Science,85000,2021-11-01,4.2
+3,Charlie Brown,Product Manager,Product,115000,2020-05-20,4.8
+4,Diana Prince,UX Designer,Design,90000,2023-03-10,4.6
+5,Evan Wright,DevOps Engineer,Engineering,105000,2021-08-05,4.3
+6,Fiona Gallagher,HR Manager,Human Resources,88000,2019-10-12,4.7
+7,George Lucas,Director of Engineering,Engineering,155000,2018-02-28,4.9
+8,Hannah Abbott,Frontend Developer,Engineering,92000,2022-09-01,4.4
+9,Ian Somerhalder,Sales Lead,Sales,120000,2020-12-15,4.1
+10,Julia Roberts,Marketing Exec,Marketing,95000,2021-06-30,4.5

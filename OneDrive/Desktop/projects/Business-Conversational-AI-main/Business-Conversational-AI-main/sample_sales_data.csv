@@ -1,0 +1,11 @@
+Product_ID,Product_Name,Category,Price,Units_Sold,Region,Sale_Date
+P001,Wireless Mouse,Electronics,25.99,150,North America,2023-10-01
+P002,Ergonomic Keyboard,Electronics,89.50,85,Europe,2023-10-02
+P003,Desk Lamp,Home Office,34.00,200,North America,2023-10-02
+P004,Office Chair,Furniture,199.99,40,Asia,2023-10-03
+P005,Bluetooth Headphones,Electronics,120.00,110,Europe,2023-10-04
+P006,Standing Desk,Furniture,350.00,25,North America,2023-10-05
+P007,Water Bottle,Accessories,15.50,300,Asia,2023-10-06
+P008,Webcam 1080p,Electronics,65.00,95,Europe,2023-10-07
+P009,Notebook,Stationery,5.00,500,North America,2023-10-08
+P010,Pen Set,Stationery,12.00,250,Asia,2023-10-09

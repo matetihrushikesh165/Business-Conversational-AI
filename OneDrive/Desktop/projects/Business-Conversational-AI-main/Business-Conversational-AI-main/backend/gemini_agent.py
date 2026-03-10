@@ -2,20 +2,63 @@ import google.generativeai as genai
 import json
 import os
 from typing import Dict, Any
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configure Gemini
-genai.configure(api_key="") #keep api key here!
+api_key = os.getenv("GOOGLE_API_KEY", "")
+genai.configure(api_key=api_key)
 
 class GeminiSQLAgent:
-    def __init__(self, schema_description: str):
+    def __init__(self, schema_description: str = "", table_name: str = "marketing_campaigns"):
         self.schema = schema_description
+        self.table_name = table_name
         self.model = genai.GenerativeModel('gemini-2.5-flash')
+
+    def set_schema(self, schema_description: str, table_name: str):
+        self.schema = schema_description
+        self.table_name = table_name
+
+    def analyze_schema(self, columns_with_types: str, sample_data: str) -> Dict[str, Any]:
+        prompt = f"""
+        You are an expert Data Analyst and Database Administrator.
+        
+        I have just loaded a new dataset into a database table.
+        Here are the columns and their SQLite data types:
+        {columns_with_types}
+        
+        Here is a small sample of the data (first 5 rows):
+        {sample_data}
+        
+        Task:
+        Analyze this dataset and provide a rich summary of what it contains, what the key dimensions (categories, dates, entities) and key metrics (numbers to calculate) are, and how they might relate to each other. This will help the user understand what insights they can get from this dataset.
+        
+        Return your answer ONLY in JSON format like this:
+        {{
+            "subject": "e.g., Marketing Campaign Performance, Sales Data, User App Activity",
+            "description": "A 2-3 sentence overview of what this dataset represents.",
+            "keyDimensions": ["e.g., Campaign_Type", "Target_Audience", "Date"],
+            "keyMetrics": ["e.g., Revenue", "Conversions", "ROI"],
+            "suggestedQuestions": [
+                "What is the total revenue by campaign type?",
+                "Which target audience has the highest ROI?"
+            ]
+        }}
+        """
+        
+        response = self.model.generate_content(
+            prompt,
+            generation_config=genai.GenerationConfig(response_mime_type="application/json")
+        )
+        
+        return json.loads(response.text)
 
     def generate_db_query(self, user_query: str) -> Dict[str, Any]:
         prompt = f"""
         You are a SQL and Data Visualization Expert.
         
-        The database table is 'marketing_campaigns' with columns:
+        The database table is '{self.table_name}' with columns:
         {self.schema}
         
         User Query: "{user_query}"
