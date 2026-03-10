@@ -6,6 +6,9 @@ from gemini_agent import GeminiSQLAgent, get_schema_summary
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -54,6 +57,30 @@ async def chat(request: QueryRequest):
         try:
             df = pd.read_sql_query(result['sql'], conn)
             print(f"Rows found: {len(df)}")
+            
+            # !! ROBUSTNESS FALLBACK !!
+            # If 0 rows are found, try refining the SQL (remove specific month filters)
+            if len(df) == 0 and "WHERE" in result['sql']:
+                print("No data found. Attempting a relaxed query (removing WHERE clauses)...")
+                sql = result['sql']
+                where_start = sql.find("WHERE")
+                # Look for the next major clause
+                candidates = []
+                for keyword in ["GROUP BY", "ORDER BY", "LIMIT"]:
+                    pos = sql.find(keyword)
+                    if pos > where_start:
+                        candidates.append(pos)
+                
+                # If no subsequent keywords, relax until the end
+                end_pos = min(candidates) if candidates else len(sql)
+                relaxed_sql = sql[:where_start] + sql[end_pos:]
+                
+                print(f"Relaxed SQL: {relaxed_sql}")
+                df = pd.read_sql_query(relaxed_sql, conn)
+                print(f"Relaxed Rows found: {len(df)}")
+                # Optionally update title
+                result['title'] += " (Expanded View)"
+            
             data_json = df.to_dict(orient='records')
         finally:
             conn.close()
