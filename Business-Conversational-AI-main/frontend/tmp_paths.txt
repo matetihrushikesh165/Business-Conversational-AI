@@ -1,0 +1,15 @@
+public/r/DarkVeil-JS-CSS.json
+public/r/DarkVeil-JS-TW.json
+public/r/DarkVeil-TS-CSS.json
+public/r/DarkVeil-TS-TW.json
+src/content/Backgrounds/DarkVeil
+src/content/Backgrounds/DarkVeil/DarkVeil.css
+src/content/Backgrounds/DarkVeil/DarkVeil.jsx
+src/demo/Backgrounds/DarkVeilDemo.jsx
+src/tailwind/Backgrounds/DarkVeil
+src/tailwind/Backgrounds/DarkVeil/DarkVeil.jsx
+src/ts-default/Backgrounds/DarkVeil
+src/ts-default/Backgrounds/DarkVeil/DarkVeil.css
+src/ts-default/Backgrounds/DarkVeil/DarkVeil.tsx
+src/ts-tailwind/Backgrounds/DarkVeil
+src/ts-tailwind/Backgrounds/DarkVeil/DarkVeil.tsx

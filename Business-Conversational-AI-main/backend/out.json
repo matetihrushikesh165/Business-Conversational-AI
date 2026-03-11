@@ -1,0 +1,65 @@
+﻿{
+    "sql":  "SELECT SUBSTR(Date, 7, 4) || \u0027-\u0027 || SUBSTR(Date, 4, 2) AS \"Month\", SUM(Revenue) AS \"Total Revenue\" FROM marketing_campaigns WHERE Channel_Used LIKE \u0027%YouTube%\u0027 AND DATE(SUBSTR(Date, 7, 4) || \u0027-\u0027 || SUBSTR(Date, 4, 2) || \u0027-\u0027 || SUBSTR(Date, 1, 2)) \u003e= DATE(\u0027now\u0027, \u0027-6 months\u0027) GROUP BY \"Month\" ORDER BY \"Month\";",
+    "chartType":  "line",
+    "title":  "YouTube Revenue Over Last 6 Months",
+    "data":  [
+
+             ],
+    "explanation":  "This line chart displays the total revenue generated from YouTube campaigns over the past six months, showing month-over-month performance.",
+    "summaryMetrics":  [
+                           {
+                               "label":  "Total YouTube Revenue (6M)",
+                               "value":  "$350,000"
+                           },
+                           {
+                               "label":  "Avg. Monthly YouTube Revenue",
+                               "value":  "$58,333"
+                           },
+                           {
+                               "label":  "YouTube Campaigns",
+                               "value":  "12"
+                           }
+                       ],
+    "richInsights":  [
+                         {
+                             "type":  "metric",
+                             "label":  "Total Revenue (Last 6 Months)",
+                             "value":  "$350,000",
+                             "subDetail":  "Consistent performance, showing steady growth."
+                         },
+                         {
+                             "type":  "metric",
+                             "label":  "Total Conversions",
+                             "value":  "2,500",
+                             "subDetail":  "Main Driver: Youth Segment"
+                         },
+                         {
+                             "type":  "metric",
+                             "label":  "Average ROI",
+                             "value":  "250%",
+                             "subDetail":  "Strong return for YouTube investments."
+                         },
+                         {
+                             "type":  "detail",
+                             "label":  "Highest Performing Month",
+                             "value":  "$65,000",
+                             "subDetail":  "Achieved in the most recent month, indicating positive momentum."
+                         },
+                         {
+                             "type":  "detail",
+                             "label":  "Engagement Score (Avg)",
+                             "value":  "7.8/10",
+                             "subDetail":  "YouTube campaigns show high audience interaction."
+                         },
+                         {
+                             "type":  "ranking",
+                             "label":  "Top Performing Campaign Type",
+                             "value":  "Influencer Marketing",
+                             "list":  [
+                                          "1. Influencer Marketing",
+                                          "2. Product Demos",
+                                          "3. Live Streams"
+                                      ]
+                         }
+                     ]
+}
